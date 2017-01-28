@@ -10,6 +10,34 @@ var config = { database: "upsilon_todolist" };
 var pool = new pg.Pool(config);
 
 
+router.post("/", function(req, res) {
+  pool.connect(function(err, client, done) {
+    if (err) {
+      console.log("Error connecting to DB", err);
+      res.sendStatus(500);
+      done();
+    } else {
+      client.query(
+        "INSERT INTO todos (task, task_priority, task_created, edition, publisher) VALUES ($1, $2, $3, $4, $5) RETURNING *;",
+        [ req.body.title, req.body.author, req.body.published, req.body.edition, req.body.publisher ],
+        function(err, result) {
+          done();
+          if (err) {
+            console.log("Error querying DB", err);
+            res.sendStatus(500);
+          } else {
+            console.log("Got info from DB", result.rows);
+            res.send(result.rows);
+          }
+        }
+      );
+    }
+  });
+});
+
+
+
+
 router.get("/", function(req, res) {
   pool.connect(function(err, client, done) {
     if (err) {
