@@ -1,6 +1,9 @@
 CREATE TABLE todos (
 	id SERIAL PRIMARY KEY,
 	task TEXT,
+	task_priority VARCHAR(6),
+--	CHECK (task_priority = 'low' OR task_priority = 'high'),
+-- use this command? or restrict in <select> <option>
 	task_created TIMESTAMP,
 	task_completed TIMESTAMP
 	);
