@@ -40,8 +40,15 @@ function displayCurrentTodos (todos) {
 
       $form.append('<input type = "date" name="task_created" value="' + date + '"/>');
 
-      var $saveButton = $('<button class="save">Save</button>');
+
+      var $completeButton = $('<button class="completed">Completed Task!</button>')
+      var $saveButton = $('<button class="save">Update</button>');
       var $deleteButton = $('<button class="delete">Delete</button>');
+
+      // $row.append('<td><button class="update btn btn-default" data-id="' + pet.pets_id + '"> GO! </button></td>');
+      //   $row.append('<td><button class="delete btn btn-danger" data-id="' + pet.pets_id + '" value ="' + pet.name + '"> Delete! </button></td>');
+
+      $completeButton.data('id',task.id);
       $saveButton.data('id',task.id);
       $deleteButton.data('id', task.id)
       $form.append($saveButton);
@@ -51,3 +58,18 @@ function displayCurrentTodos (todos) {
       $('#task-list').append($li);
   });
 };
+
+function deleteTask(event){
+  event.preventDefault();
+
+  var $button = $(this);
+    console.log($(this));
+  var taskName = $(this).val(); // need to attach taskName to a value field on the delete button.
+    if (confirm("Are you sure you want to delete this task: " + taskName + "?")) {
+      $.ajax({
+        url: '/tasks/' + $button.data('id'),
+        type: 'DELETE',
+        success: getTasks
+      });
+    };
+}
