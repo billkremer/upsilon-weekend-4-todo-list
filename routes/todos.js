@@ -18,13 +18,7 @@ router.get("/", function(req, res) {
       done(); // returns the connection
     } else {
       // no error occurred, time to query
-      // 1. sql string - the actual SQL query we want to running
-      // 2. array of data - any data we want to pass to a parameterized statement
-      // 3. callback - function to run after the database gives us our result
-      //               takes an error object and the result object as it's args
-      client.query(
-        "SELECT * FROM todos ORDER BY task",
-        function(err, result) {
+      client.query( "SELECT * FROM todos ORDER BY task", function(err, result) {
           done();
           if (err) {
             console.log("Error querying DB", err);
@@ -33,8 +27,11 @@ router.get("/", function(req, res) {
             console.log("Got info from DB", result.rows);
             res.send(result.rows);
           }
-        }
-      );
-    }
-  });
-});
+        }  // closes client query return function
+      );  // closes client query
+    }; // closes initial else
+  }); // closes pool.connection
+}); // closes get
+
+
+module.exports = router;
