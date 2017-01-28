@@ -2,7 +2,7 @@ var express =  require('express');
 var app = express();
 var path = require('path');
 var bodyParser = require('body-parser');
-var pets = require('./routes/todos');
+var todos = require('./routes/todos');
 
 
 app.use(bodyParser.urlencoded({ extended: true }));
