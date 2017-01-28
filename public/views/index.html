@@ -9,27 +9,44 @@
     <title>TODO LIST</title>
   </head>
   <body>
+    <main class="container">
+
     <h1>/// TODO LIST ///</h1>
 
+    <div class='row'>
+
     <form id="task-form">
-      <div class="form-group">
+      <div class="form-group col-xs-5">
         <label for="task">Task</label>
         <input type="text" id="task" name="task" class="form-control" />
       </div>
 
-      <div class="form-group">
-        <label for="dateDue">dateDue</label>
+      <div class="form-group col-xs-3">
+        <label for="dateDue">Date Due</label>
         <input type="date" id="dateDue" name="dateDue" class="form-control" />
       </div>
 
-      <button id="task-submit"  class="btn btn-default">Create Task</button>
+      <div class="form-group col-xs-2">
+        <label for="priority">Priority</label>
+        <select type="date" id="priority" name="priority" class="form-control" />
+          <option value='low'>Low</option>
+          <option value='high'>High</option>
+        </select>
+      </div>
+
+      <div class="form-group col-xs-2">
+        <button id="task-submit" class="btn btn-default">Create Task</button>
+
+    </div>
     </form>
 
+</div>
 
     <h2>Tasks</h2>
         <ul id="task-list">
 
         </ul>
 
+    </main>
   </body>
 </html>
