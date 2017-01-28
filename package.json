@@ -1,0 +1,28 @@
+{
+  "name": "upsilon-weekend-4-todo-list",
+  "version": "1.0.0",
+  "description": "A TODO list.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/billkremer/upsilon-weekend-4-todo-list.git"
+  },
+  "keywords": [
+    "TODO"
+  ],
+  "author": "Bill Kremer <bill.kremer.csp@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/billkremer/upsilon-weekend-4-todo-list/issues"
+  },
+  "homepage": "https://github.com/billkremer/upsilon-weekend-4-todo-list#readme",
+  "dependencies": {
+    "body-parser": "^1.16.0",
+    "express": "^4.14.0",
+    "pg": "^6.1.2"
+  }
+}
