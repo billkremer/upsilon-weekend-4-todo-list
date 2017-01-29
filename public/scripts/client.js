@@ -1,19 +1,63 @@
+var verbose = true; // lets messages be turned off for non-error console.logs
+
+
 $(function () {
-  console.log('ready!');
+  if (verbose) console.log('ready!');
 
-  getTasks();
-
-  // $('#book-submit').on('click', postBooks);
-
-//$('#task-form').on('submit', addTask)
+ getTasks();
 
 
+  $('#task-form').on('submit', addTask)
+
+  $('#taskList').on('click','.updateButton', updateTask);
 
 
+//  $('#taskList').on('click','.completedButton', completeTask);
+
+  $('#taskList').on('click', '.deleteButton', deleteTask);
 
 });
 
+// function completeTask
 
+
+function updateTask (event) {
+  event.preventDefault();
+
+
+  var $button = $(this); // this is the button that was clicked
+  var $form = $button.closest('form');
+  // get the info out of the form
+  if (verbose) console.log($form,'form1');
+  var data = $form.serialize();
+
+  if (verbose) console.log($button.data('id'),'form2');
+  // send data to server
+  $.ajax({
+    url: '/todos/' + $button.data('id'),
+    type: 'PUT',
+    data: data,
+    success: getTasks
+  });
+}
+
+function addTask (event) {
+  // prevent browser from refreshing
+  event.preventDefault();
+
+  console.log($(this),'this');
+
+  // get the info out of the form
+  var formData = $(this).serialize();
+  if (verbose) console.log(formData);
+
+  $.ajax({
+    url: '/todos',
+    type: 'POST',
+    data: formData,
+    success: getTasks
+  });
+};
 
 function getTasks () {
   $.ajax({
@@ -24,38 +68,49 @@ function getTasks () {
 };
 
 function displayCurrentTodos (todos) {
-  console.log('got the tasks', todos);
+  if (verbose) console.log('got the tasks', todos);
 
-  $('#task-list').empty();
+$('#taskList').empty();
+
+
   todos.forEach(function(task){
-      var $li = $('<li></li>');
 
-      var $form = $('<form></form>');
+    var $newTaskDiv = $('<div class="row"></div>');
+    var $newTaskRow = $('<form></form>');
 
-      $form.append('<input type = "text" name="title" value="' + task.task + '"/>');
-      // $form.append('<input type = "text" name="author" value="' + task.priority + '"/>');
+    $newTaskRow.append('<input class="task col-xs-6" type="text" name="title" value="' + task.task + '"/>');
 
-      var date = new Date(task.task_created).toISOString().slice(0,10);
-      // yyyy-mm-ddTxxxxxxx
+    var taskDueDate = new Date(task.task_due).toISOString().slice(0,10);
 
-      $form.append('<input type = "date" name="task_created" value="' + date + '"/>');
+    $newTaskRow.append('<input class="dueDate col-xs-2" type="date" name="task_due" value="' + taskDueDate + '"/>');
 
 
-      var $completeButton = $('<button class="completed">Completed Task!</button>')
-      var $saveButton = $('<button class="save">Update</button>');
-      var $deleteButton = $('<button class="delete">Delete</button>');
+    if (task.task_priority !== 'High') {
+      task.task_priority = 'Low'; // sets all non-Highs to low incase something modifies the database somehow.  doesn't change the database here though...
+    };
 
-      // $row.append('<td><button class="update btn btn-default" data-id="' + pet.pets_id + '"> GO! </button></td>');
-      //   $row.append('<td><button class="delete btn btn-danger" data-id="' + pet.pets_id + '" value ="' + pet.name + '"> Delete! </button></td>');
+    if (task.task_priority == 'Low') {
+      $newTaskRow.append('<select class="priority col-xs-1" type="text" name="task_priority" value="' + task.task_priority + '"><option value="Low" selected>Low</option><option value="High">High</option></select>');
+    } else {
+      $newTaskRow.append('<select class="col-xs-1 priority" type="text" name="task_priority" value="' + task.task_priority + '"><option value="Low">Low</option><option value="High" selected>High</option></select>');
+    };
 
-      $completeButton.data('id',task.id);
-      $saveButton.data('id',task.id);
-      $deleteButton.data('id', task.id)
-      $form.append($saveButton);
-      $form.append($deleteButton);
+    var $updateButton = $('<button class="col-xs-1 updateButton">Update</button>');
+    var $completeButton = $('<button class="col-xs-1 completedButton" aria-label="task completed">Complete</button>');
+    var $deleteButton = $('<button class="col-xs-1 deleteButton">Delete</button>');
 
-      $li.append($form);
-      $('#task-list').append($li);
+    $updateButton.data('id',task.id);
+    $completeButton.data('id',task.id);
+    $deleteButton.data('id', task.id);
+
+    $newTaskRow.append($updateButton);
+    $newTaskRow.append($completeButton);
+    $newTaskRow.append($deleteButton);
+
+    $newTaskDiv.append($newTaskRow);
+
+    $('#taskList').append($newTaskDiv);
+
   });
 };
 
@@ -63,11 +118,20 @@ function deleteTask(event){
   event.preventDefault();
 
   var $button = $(this);
-    console.log($(this));
-  var taskName = $(this).val(); // need to attach taskName to a value field on the delete button.
-    if (confirm("Are you sure you want to delete this task: " + taskName + "?")) {
+  if (verbose) console.log($(this), 'deleteButotn');
+
+  var $form = $button.closest('form');
+  // get the info out of the form
+  if (verbose) console.log($form,'form1');
+  if (verbose) console.log($($form).children('.task').val());
+
+  var taskName = $($form).children('.task').val(); // need to attach taskName to a value field on the delete button.
+
+
+    if (confirm("Are you sure you want to delete this task:\n -> " + taskName +
+    " ?\nClick Cancel to keep, OK to Delete.")) {
       $.ajax({
-        url: '/tasks/' + $button.data('id'),
+        url: '/todos/' + $button.data('id'),
         type: 'DELETE',
         success: getTasks
       });
