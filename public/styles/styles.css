@@ -1,5 +1,51 @@
+/** {
+  border: 1px solid purple;
+}*/
+
+
+
 #task-submit {
 position: relative;
 bottom: -25px;
 
 }
+
+.taskHeader {
+  background-color: aliceblue;
+  border: 1px solid lightgrey;
+  height: 2em;
+  font-weight: bold;
+}
+
+
+
+.completedButton, .deleteButton, .updateButton {
+  padding-left: 1px;
+  padding-right: 1px;
+  text-align: center;
+}
+
+input.completedButton {
+font-size: 1.5em;
+/*padding-left: 30px; not doing anythign*/
+}
+
+.priority {
+  height: 25px;
+}
+
+.toDelete {
+  background-color: tomato;
+  color: white;
+}
+
+
+/*.taskDataColumn {
+
+width: calc((98% - 130px)/6);
+border: 1px solid gray;
+float: left;
+display: block;
+margin: 5px 2px;
+padding: 2px 2px;
+}*/
