@@ -1,3 +1,6 @@
+CREATE DATABASE upsilon_todolist;
+
+
 CREATE TABLE todos (
 	id SERIAL PRIMARY KEY,
 	task TEXT,
