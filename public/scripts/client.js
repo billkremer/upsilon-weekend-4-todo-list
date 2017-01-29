@@ -1,29 +1,26 @@
-var verbose = true; // lets messages be turned off for non-error console.logs
+var verbose = false; // lets messages be turned off for non-error console.logs
 
 
 $(function () {
   if (verbose) console.log('ready!');
 
- getCurrentTasks();
- getCompletedTasks();
+  getCurrentTasks();
+  getCompletedTasks();
 
   $('#task-form').on('submit', addTask)
 
   $('#taskList').on('click','.updateButton', updateTask);
 
-
   $('#taskList').on('click','.completedButton', completeTask);
+  $('#completedTaskList').on('click', '.unCompleteButton', unCompleteTask);
 
   $('#taskList').on('click', '.deleteButton', deleteTask);
   $('#completedTaskList').on('click', '.deleteButton', deleteTask);
 
-  $('#completedTaskList').on('click', '.unCompleteButton', unCompleteTask)
-
-});
+}); // end doc ready
 
 function completeTask (event) {
   event.preventDefault();
-
 
   var $button = $(this); // this is the button that was clicked
   var $form = $button.closest('form');
@@ -38,22 +35,21 @@ function completeTask (event) {
     type: 'PUT',
     data: data,
     success: [getCurrentTasks,getCompletedTasks]
-  });
-};
+  }); // end ajax
+}; // end completeTask
 
 function getCompletedTasks () {
   $.ajax({
     url: '/todos/complete',
     type: 'GET',
     success: displayCompletedTasks
-  });
-};
+  }); // end ajax
+}; // end getCompletedTasks
 
 function displayCompletedTasks (todos) {
   if (verbose) console.log('got the tasks', todos);
 
-$('#completedTaskList').empty();
-
+  $('#completedTaskList').empty();
 
   todos.forEach(function(task){
 
@@ -88,11 +84,7 @@ $('#completedTaskList').empty();
     $('#completedTaskList').append($newTaskDiv);
 
   }); // closes forEach
-
-
-
-
-}
+}; // closes displayCompletedTasks
 
 function unCompleteTask (event) {
   event.preventDefault();
@@ -111,14 +103,11 @@ function unCompleteTask (event) {
     type: 'PUT',
     data: data,
     success: [getCurrentTasks,getCompletedTasks]
-  });
-
-
-}
+  }); // closes ajax
+}; // closes unCompleteTask
 
 function updateTask (event) {
   event.preventDefault();
-
 
   var $button = $(this); // this is the button that was clicked
   var $form = $button.closest('form');
@@ -133,8 +122,8 @@ function updateTask (event) {
     type: 'PUT',
     data: data,
     success: [getCurrentTasks,getCompletedTasks]
-  });
-}
+  });  // closes ajax
+}; // closes updateTask
 
 function addTask (event) {
   // prevent browser from refreshing
@@ -151,22 +140,21 @@ function addTask (event) {
     type: 'POST',
     data: formData,
     success: getCurrentTasks
-  });
-};
+  }); // closes ajax
+}; // closes addTask
 
 function getCurrentTasks () {
   $.ajax({
     url: '/todos/current',
     type: 'GET',
     success: displayCurrentTodos
-  });
-};
+  });// closes ajax
+}; // closes getCurrentTasks
 
 function displayCurrentTodos (todos) {
   if (verbose) console.log('got the tasks', todos);
 
-$('#taskList').empty();
-
+  $('#taskList').empty();
 
   todos.forEach(function(task){
 
@@ -207,7 +195,7 @@ $('#taskList').empty();
     $('#taskList').append($newTaskDiv);
 
   }); // closes forEach
-}; // closes function
+}; // closes displayCurrentTodos function
 
 
 function deleteTask(event){ // works for both current and completed
@@ -227,7 +215,7 @@ function deleteTask(event){ // works for both current and completed
 
   if (taskName.length > 40) {
     taskName = taskName.substring(0,40) + '...';
-  };
+  }; // keeps the name manageable in the confirm pop-up.
 
   $form.children().addClass('toDelete');
 
@@ -241,10 +229,9 @@ function deleteTask(event){ // works for both current and completed
         type: 'DELETE',
         success: [getCurrentTasks,getCompletedTasks]
       });
-    } else {
+    } else { // removes the highlight class from wherever it was.
       $('#taskList').find('.toDelete').removeClass('toDelete');
       $('#completedTaskList').find('.toDelete').removeClass('toDelete');
     };
   }; // closes confirmDelete
-
 }; // closes deleteTask
