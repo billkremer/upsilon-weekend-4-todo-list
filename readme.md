@@ -9,10 +9,12 @@ This is a TODO list that can be used to keep track of important tasks.
 
 ###Technology Used:
 
-Express, Node, Git, HTML, CSS
+Express, Node, Git, HTML, CSS, PostgreSQL Database Server
 
-Please use ```npm install``` to start creating the framework in the terminal.
+This application uses a Postgres server.  Please use the queries in ```database.sql``` to create the appropriately named database, table, and fields.
+
+Use ```npm install``` to start creating the framework in the terminal.
 
 To start, type ```npm start``` in the terminal.
 
-Navigate to [http://localhost:3000](http://localhost:3000/).
+Finally, navigate to [http://localhost:3000](http://localhost:3000/).
