@@ -10,8 +10,7 @@ CREATE TABLE todos (
 	);
 
 
-
 INSERT INTO todos (task, task_priority, task_created, task_due)
-VALUES 	('Vacuum the living room', 'Low', '2016-12-28', ''),
+VALUES 	('Vacuum the living room', 'Low', '2016-12-28', null),
 				('Wash the dishes', 'High', '2017-01-10', '2017-01-20'),
-				('Walk the dog', '', '2017-01-14', '');
+				('Walk the dog', null, '2017-01-14', null);
