@@ -35,11 +35,12 @@ input.task, input.dueDate, input.priority  {
 }
 
 select.priority {
-  /*margin-top: 5px;
-  margin-bottom: 4px;*/
   height: 34px;
 }
 
+/*.priority {
+  height: 34px;
+}   this on apparently adds a margin top to the entire row? */
 
 .completedButton, .deleteButton, .updateButton, .unCompleteButton {
   padding-left: 1px;
@@ -47,17 +48,20 @@ select.priority {
   text-align: center;
 }
 
-.toDelete {
+
+
+.toDelete, .toDelete input {  /*this is part of the problem*/
   background-color: red;
   background: red;
   color: white;
   max-height: 34px;
 }
 
-div#completedTaskList div.row:nth-child(odd) input, div#taskList div.row:nth-child(odd) input {
+/*div#completedTaskList div.row:nth-child(odd) input, div#taskList div.row:nth-child(odd) input {
   background-color: aliceblue;
-}
+}*/
 
-.priority {
-  height: 25px;
+/* this is more specific than the toDelete class.  can the ids be removed to fix? */
+div.row:nth-child(odd) input, div.row:nth-child(odd) input {
+  background-color: aliceblue;
 }
