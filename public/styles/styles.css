@@ -2,7 +2,9 @@
   border: 1px solid purple;
 }*/
 
-
+.row {
+    margin-bottom: 1px;
+}
 
 #task-submit {
 position: relative;
@@ -10,33 +12,70 @@ bottom: -25px;
 
 }
 
-.taskHeader {
-  background-color: aliceblue;
-  border: 1px solid lightgrey;
+.currentTaskHeader, .completedTaskHeader {
+  border: 1px solid darkgrey;
   height: 2em;
   font-weight: bold;
 }
 
+.currentTaskHeader {
+  background-color: lightgoldenrodyellow;
+}
+
+.completedTaskHeader {
+background-color: #e7fee7;
+}
 
 
-.completedButton, .deleteButton, .updateButton {
+
+input.task, input.dueDate, input.priority  {
+  min-height: 34px;
+  overflow: visible;
+    border: 1px solid darkgrey;
+}
+
+select.priority {
+  /*margin-top: 5px;
+  margin-bottom: 4px;*/
+  height: 34px;
+}
+
+
+.completedButton, .deleteButton, .updateButton, .unCompleteButton {
   padding-left: 1px;
   padding-right: 1px;
   text-align: center;
 }
 
-input.completedButton {
-font-size: 1.5em;
-/*padding-left: 30px; not doing anythign*/
+div#completedTaskList div.row:nth-child(odd) input, div#taskList div.row:nth-child(odd) input {
+  background-color: aliceblue;
+  /*background: green;*/
 }
+
+/*div#completedTaskList div.row input:nth-child(even) {
+  background-color: blue;
+  background: green;
+}
+
+div#completedTaskList div.row input:nth-child(even) {
+  background-color: blue;
+  background: green;
+}*/
+
+
+
+
+
+
 
 .priority {
   height: 25px;
 }
 
 .toDelete {
-  background-color: tomato;
+  background-color: red;
   color: white;
+  max-height: 34px;
 }
 
 
