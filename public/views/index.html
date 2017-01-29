@@ -44,11 +44,11 @@
 
 </div>   <!-- class row closer -->
 
-    <h2>// Task List //</h2>
+    <h2>// Current Task List //</h2>
 
 
     <div class='dataCenteringClass'>
-      <div class='row taskHeader'>
+      <div class='row currentTaskHeader'>
         <div class='task col-xs-6'>
           Task:
         </div>
@@ -76,16 +76,41 @@
 
 
       </div>
-
-
     </div>
 
-    <!-- <div id="errorMessages">
-      <h2>// WARNING //</h2>
-    </div> -->
+<br />
+<h2>// Completed Task List //</h2>
+    <div class='dataCenteringClass'>
+      <div class='row completedTaskHeader'>
+        <div class='task col-xs-7'>
+          Task:
+        </div>
 
 
+        <div class='dueDate col-xs-2'>
+          Date Completed:
+        </div>
+        <div class='priority col-xs-1'>
+          Priority:
+        </div>
+        <div class='updateButton col-xs-1'>
+          UnComplete
+        </div>
+        <!-- <div class='completedButton col-xs-1'>
+          Complete!
+        </div> -->
+        <div class='deleteButton col-xs-1'>
+          Delete
+        </div>
+      </div>
 
+      <div id="completedTaskList">
+
+        <!-- data rows to be added via JavaScript -->
+
+
+      </div>
+    </div>
     </main>
   </body>
 </html>
