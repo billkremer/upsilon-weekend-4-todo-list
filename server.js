@@ -8,7 +8,7 @@ var todos = require('./routes/todos');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
-app.use('/todos', todos);
+app.use('/todos', todos); // pass through to the todos.js route
 
 
 // serve the index page at /
