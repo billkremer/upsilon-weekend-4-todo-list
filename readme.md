@@ -18,3 +18,8 @@ Use ```npm install``` to start creating the framework in the terminal.
 To start, type ```npm start``` in the terminal.
 
 Finally, navigate to [http://localhost:3000](http://localhost:3000/).
+
+
+###Future Updates:
+
+Future updates would include allowing larger inputs for longer tasks.
