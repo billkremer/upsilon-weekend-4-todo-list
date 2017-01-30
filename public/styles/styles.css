@@ -2,6 +2,13 @@
   border: 1px solid purple;
 }*/
 
+body{
+  background-color: lemonchiffon;
+  /*background: radial-gradient(circle 1050px at 1% 33%, #F4F2F1, #534236);
+  height: 1050px;*/
+}
+/*#ceebfd  #e7f5fe*/
+
 .row {
     margin-bottom: 1px;
 }
@@ -15,15 +22,15 @@ bottom: -25px;
 .currentTaskHeader, .completedTaskHeader {
   border: 1px solid darkgrey;
   height: 2em;
-  font-weight: bold;
+  font-weight: 500;
 }
 
 .currentTaskHeader {
-  background-color: lightgoldenrodyellow;
+  background-color: #ff7c4d;
 }
 
 .completedTaskHeader {
-background-color: #e7fee7;
+background-color: #5dd55d;
 }
 
 
@@ -48,20 +55,15 @@ select.priority {
   text-align: center;
 }
 
-
-
-.toDelete, .toDelete input {  /*this is part of the problem*/
-  background-color: red;
-  background: red;
+.toDelete {  /*this is part of the problem*/
+  background-color: red !important;
   color: white;
   max-height: 34px;
 }
 
-/*div#completedTaskList div.row:nth-child(odd) input, div#taskList div.row:nth-child(odd) input {
-  background-color: aliceblue;
-}*/
+
 
 /* this is more specific than the toDelete class.  can the ids be removed to fix? */
-div.row:nth-child(odd) input, div.row:nth-child(odd) input {
+div.row:nth-child(odd) input {
   background-color: aliceblue;
 }
